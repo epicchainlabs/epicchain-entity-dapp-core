@@ -18,7 +18,7 @@ thank you
 great explanation
 
 mwherman2000 - Today at 7:43 PM
-The trick is to understand which MSIL patterns that neon.exe understands and then map that back into the subset of C#.MS (C# 6.0 source statement constructs) that neon.exe supports.  I call this subset of C#.MS: C#.NEO.  I'm trying to document this as part of my dApp submission this week.  Something I call NEO Persistable Classes for C#.NEO. ....more news by the end of the week.
+The trick is to understand which MSIL patterns that neon.exe understands and then map that back into the subset of C#.MS (C# 6.0 source statement constructs) that neon.exe supports.  I call this subset of C#.MS: C#.EpicChain.  I'm trying to document this as part of my dApp submission this week.  Something I call NEO Persistable Classes for C#.EpicChain. ....more news by the end of the week.
 
 Keep asking the questions so I know what to include in my write-up.
 

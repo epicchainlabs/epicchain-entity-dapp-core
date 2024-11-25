@@ -1,4 +1,4 @@
-﻿using Neo.SmartContract.Framework;
+﻿using EpicChain.SmartContract.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -450,9 +450,9 @@ namespace NeoCollectableClasses4
         private static readonly byte[] _bi = "i".AsByteArray(); // Index value
         private static readonly byte[] _bf = "f".AsByteArray(); // Field name
 
-        private static readonly byte[] _bStringType = { (byte)Neo.SmartContract.ContractParameterType.String };
-        private static readonly byte[] _bBigIntegerType = { (byte)Neo.SmartContract.ContractParameterType.Integer };
-        private static readonly byte[] _bUserScriptHashType = { (byte)Neo.SmartContract.ContractParameterType.ByteArray };
+        private static readonly byte[] _bStringType = { (byte)EpicChain.SmartContract.ContractParameterType.String };
+        private static readonly byte[] _bBigIntegerType = { (byte)EpicChain.SmartContract.ContractParameterType.Integer };
+        private static readonly byte[] _bUserScriptHashType = { (byte)EpicChain.SmartContract.ContractParameterType.ByteArray };
 
         /// <summary>
         /// Compute a NEO Storage Key.

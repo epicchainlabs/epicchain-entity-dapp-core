@@ -10,7 +10,7 @@ namespace NeoPesistenceClasses2
     {
         public static void Trace(params object[] args)
         {
-            Neo.SmartContract.Framework.Services.Neo.Runtime.Notify(args);
+            EpicChain.SmartContract.Framework.Services.EpicChain.Runtime.Notify(args);
         }
     }
 }

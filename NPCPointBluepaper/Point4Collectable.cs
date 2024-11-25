@@ -1,4 +1,4 @@
-﻿using Neo.SmartContract.Framework;
+﻿using EpicChain.SmartContract.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -255,18 +255,18 @@ namespace NeoCollectableClasses4
         {
             if (bkey.Length == 0) return false;
 
-            Neo.SmartContract.Framework.Services.Neo.StorageContext ctx = Neo.SmartContract.Framework.Services.Neo.Storage.CurrentContext;
+            EpicChain.SmartContract.Framework.Services.EpicChain.StorageContext ctx = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.CurrentContext;
             byte[] _bkeyTag = Helper.Concat(bkey, _bclassKeyTag);
 
             p._state = NeoEntityModel.EntityState.PUTTED;
             /*STA*/
-            Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bSTA), p._state.AsBigInteger());
+            EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bSTA), p._state.AsBigInteger());
             /*EXT*/
-            Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bEXT), p._extension);
+            EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bEXT), p._extension);
             /*FIELD*/
-            Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bX), p._x);
+            EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bX), p._x);
             /*FIELD*/
-            Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bY), p._y);
+            EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bY), p._y);
             LogExt("Put(bkey).p", p);
             return true;
         }
@@ -282,7 +282,7 @@ namespace NeoCollectableClasses4
             if (skey.Length == 0) return false;
             LogExt("Put(ks).p", p);
 
-            Neo.SmartContract.Framework.Services.Neo.StorageContext ctx = Neo.SmartContract.Framework.Services.Neo.Storage.CurrentContext;
+            EpicChain.SmartContract.Framework.Services.EpicChain.StorageContext ctx = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.CurrentContext;
             string _skeyTag = skey + _classKeyTag;
             Trace("Put(ks)._skeyTag", _skeyTag);
 
@@ -290,13 +290,13 @@ namespace NeoCollectableClasses4
             BigInteger bis = p._state.AsBigInteger();
             Trace("Put(ks).bis", bis);
             /*STA*/
-            Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, _skeyTag + _sSTA, bis);
+            EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, _skeyTag + _sSTA, bis);
             /*EXT*/
-            Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, _skeyTag + _sEXT, p._extension);
+            EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, _skeyTag + _sEXT, p._extension);
             /*FIELD*/
-            Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, _skeyTag + _sX, p._x);
+            EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, _skeyTag + _sX, p._x);
             /*FIELD*/
-            Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, _skeyTag + _sY, p._y);
+            EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, _skeyTag + _sY, p._y);
             LogExt("Put(ks).p", p);
             return true;
         }
@@ -310,12 +310,12 @@ namespace NeoCollectableClasses4
         {
             if (bkey.Length == 0) return Null();
 
-            Neo.SmartContract.Framework.Services.Neo.StorageContext ctx = Neo.SmartContract.Framework.Services.Neo.Storage.CurrentContext;
+            EpicChain.SmartContract.Framework.Services.EpicChain.StorageContext ctx = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.CurrentContext;
             byte[] _bkeyTag = Helper.Concat(bkey, _bclassKeyTag);
 
             Point p;
             /*STA*/
-            byte[] bsta = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, Helper.Concat(_bkeyTag, _bSTA));
+            byte[] bsta = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, Helper.Concat(_bkeyTag, _bSTA));
             NeoTrace.Trace("Get(kb).bs", bsta.Length, bsta);
             if (bsta.Length == 0)
             {
@@ -324,7 +324,7 @@ namespace NeoCollectableClasses4
             else // not MISSING
             {
                 /*EXT*/
-                byte[] bext = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, Helper.Concat(_bkeyTag, _bEXT));
+                byte[] bext = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, Helper.Concat(_bkeyTag, _bEXT));
                 int ista = (int)bsta.AsBigInteger();
                 NeoEntityModel.EntityState sta = (NeoEntityModel.EntityState)ista;
                 if (sta == NeoEntityModel.EntityState.TOMBSTONED)
@@ -336,9 +336,9 @@ namespace NeoCollectableClasses4
                 {
                     p = new Point();
                     /*FIELD*/
-                    BigInteger x = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, Helper.Concat(_bkeyTag, _bX)).AsBigInteger();
+                    BigInteger x = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, Helper.Concat(_bkeyTag, _bX)).AsBigInteger();
                     /*FIELD*/
-                    BigInteger y = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, Helper.Concat(_bkeyTag, _bY)).AsBigInteger();
+                    BigInteger y = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, Helper.Concat(_bkeyTag, _bY)).AsBigInteger();
                     p._x = x;
                     p._y = y;
                     p._state = sta;
@@ -359,12 +359,12 @@ namespace NeoCollectableClasses4
         {
             if (skey.Length == 0) return Null();
 
-            Neo.SmartContract.Framework.Services.Neo.StorageContext ctx = Neo.SmartContract.Framework.Services.Neo.Storage.CurrentContext;
+            EpicChain.SmartContract.Framework.Services.EpicChain.StorageContext ctx = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.CurrentContext;
             string _skeyTag = skey + _classKeyTag;
 
             Point p;
             /*STA*/
-            byte[] bsta = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, _skeyTag + _sSTA);
+            byte[] bsta = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, _skeyTag + _sSTA);
             NeoTrace.Trace("Get(ks).bs", bsta.Length, bsta);
             if (bsta.Length == 0)
             {
@@ -373,7 +373,7 @@ namespace NeoCollectableClasses4
             else // not MISSING
             {
                 /*EXT*/
-                byte[] bext = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, _skeyTag + _sEXT);
+                byte[] bext = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, _skeyTag + _sEXT);
                 int ista = (int)bsta.AsBigInteger();
                 NeoEntityModel.EntityState sta = (NeoEntityModel.EntityState)ista;
                 if (sta == NeoEntityModel.EntityState.TOMBSTONED)
@@ -385,9 +385,9 @@ namespace NeoCollectableClasses4
                 {
                     p = new Point();
                     /*FIELD*/
-                    BigInteger x = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, _skeyTag + _sX).AsBigInteger();
+                    BigInteger x = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, _skeyTag + _sX).AsBigInteger();
                     /*FIELD*/
-                    BigInteger y = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, _skeyTag + _sY).AsBigInteger();
+                    BigInteger y = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, _skeyTag + _sY).AsBigInteger();
                     NeoTrace.Trace("Get(ks).x,y", x, y);
                     p._x = x;
                     p._y = y;
@@ -436,12 +436,12 @@ namespace NeoCollectableClasses4
         {
             if (bkey.Length == 0) return Null(); // TODO - create NeoEntityModel.EntityState.BADKEY?
 
-            Neo.SmartContract.Framework.Services.Neo.StorageContext ctx = Neo.SmartContract.Framework.Services.Neo.Storage.CurrentContext;
+            EpicChain.SmartContract.Framework.Services.EpicChain.StorageContext ctx = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.CurrentContext;
             byte[] _bkeyTag = Helper.Concat(bkey, _bclassKeyTag);
 
             Point p;
             /*STA*/
-            byte[] bsta = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, Helper.Concat(_bkeyTag, _bSTA));
+            byte[] bsta = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, Helper.Concat(_bkeyTag, _bSTA));
             NeoTrace.Trace("Bury(kb).bs", bsta.Length, bsta);
             if (bsta.Length == 0)
             {
@@ -451,13 +451,13 @@ namespace NeoCollectableClasses4
             {
                 p = Point.Tombstone(); // TODO - should Bury() preserve the exist field values or re-initialize them? Preserve is cheaper but not as private
                 /*STA*/
-                Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bSTA), p._state.AsBigInteger());
+                EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bSTA), p._state.AsBigInteger());
                 /*EXT*/
-                Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bEXT), p._extension);
+                EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bEXT), p._extension);
                 /*FIELD*/
-                Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bX), p._x);
+                EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bX), p._x);
                 /*FIELD*/
-                Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bY), p._y);
+                EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, Helper.Concat(_bkeyTag, _bY), p._y);
             }
             LogExt("Bury(kb).p", p);
             return p; // return Point p to signal if key is Missing or bad key
@@ -472,12 +472,12 @@ namespace NeoCollectableClasses4
         {
             if (skey.Length == 0) return Null(); // TODO - create NeoEntityModel.EntityState.BADKEY?
 
-            Neo.SmartContract.Framework.Services.Neo.StorageContext ctx = Neo.SmartContract.Framework.Services.Neo.Storage.CurrentContext;
+            EpicChain.SmartContract.Framework.Services.EpicChain.StorageContext ctx = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.CurrentContext;
             string _skeyTag = skey + _classKeyTag;
 
             Point p;
             /*STA*/
-            byte[] bsta = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, _skeyTag + _sSTA);
+            byte[] bsta = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, _skeyTag + _sSTA);
             NeoTrace.Trace("Bury(ks).bs", bsta.Length, bsta);
             if (bsta.Length == 0)
             {
@@ -487,13 +487,13 @@ namespace NeoCollectableClasses4
             {
                 p = Point.Tombstone(); // TODO - should Bury() preserve the exist field values or re-initialize them? Preserve is cheaper but not as private
                 /*STA*/
-                Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, _skeyTag + _sSTA, p._state.AsBigInteger());
+                EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, _skeyTag + _sSTA, p._state.AsBigInteger());
                 /*EXT*/
-                Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, _skeyTag + _sEXT, p._extension);
+                EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, _skeyTag + _sEXT, p._extension);
                 /*FIELD*/
-                Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, _skeyTag + _sX, p._x);
+                EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, _skeyTag + _sX, p._x);
                 /*FIELD*/
-                Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, _skeyTag + _sY, p._y);
+                EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, _skeyTag + _sY, p._y);
             }
             LogExt("Bury(ks).p", p);
             return p; // return Point p to signal if key is Missing or bad key
@@ -510,19 +510,19 @@ namespace NeoCollectableClasses4
         {
             if (NeoVersionedAppUser.IsNull(vau)) return false;
 
-            Neo.SmartContract.Framework.Services.Neo.StorageContext ctx = Neo.SmartContract.Framework.Services.Neo.Storage.CurrentContext;
+            EpicChain.SmartContract.Framework.Services.EpicChain.StorageContext ctx = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.CurrentContext;
             NeoStorageKey nsk = NeoStorageKey.New(vau, "Point");
 
             byte[] bkey;
             p._state = NeoEntityModel.EntityState.PUTTED;
             /*STA*/
-            Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bSTA), p._state.AsBigInteger());
+            EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bSTA), p._state.AsBigInteger());
             /*EXT*/
-            Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bEXT), p._extension);
+            EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bEXT), p._extension);
             /*FIELD*/
-            Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bX), p._x);
+            EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bX), p._x);
             /*FIELD*/
-            Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bY), p._y);
+            EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bY), p._y);
             LogExt("PutElement(vau,i).p", p);
             return true;
         }
@@ -537,13 +537,13 @@ namespace NeoCollectableClasses4
         {
             if (NeoVersionedAppUser.IsNull(vau)) return Null();
 
-            Neo.SmartContract.Framework.Services.Neo.StorageContext ctx = Neo.SmartContract.Framework.Services.Neo.Storage.CurrentContext;
+            EpicChain.SmartContract.Framework.Services.EpicChain.StorageContext ctx = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.CurrentContext;
             NeoStorageKey nsk = NeoStorageKey.New(vau, "Point");
 
             Point p;
             byte[] bkey;
             /*STA*/
-            byte[] bsta = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bSTA));
+            byte[] bsta = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bSTA));
             NeoTrace.Trace("Get(kb).bs", bsta.Length, bsta);
             if (bsta.Length == 0)
             {
@@ -552,7 +552,7 @@ namespace NeoCollectableClasses4
             else // not MISSING
             {
                 /*EXT*/
-                byte[] bext = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bEXT));
+                byte[] bext = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bEXT));
                 int ista = (int)bsta.AsBigInteger();
                 NeoEntityModel.EntityState sta = (NeoEntityModel.EntityState)ista;
                 if (sta == NeoEntityModel.EntityState.TOMBSTONED)
@@ -564,9 +564,9 @@ namespace NeoCollectableClasses4
                 {
                     p = new Point();
                     /*FIELD*/
-                    BigInteger x = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bX)).AsBigInteger();
+                    BigInteger x = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bX)).AsBigInteger();
                     /*FIELD*/
-                    BigInteger y = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bY)).AsBigInteger();
+                    BigInteger y = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bY)).AsBigInteger();
                     p._x = x;
                     p._y = y;
                     p._state = sta;
@@ -591,13 +591,13 @@ namespace NeoCollectableClasses4
                 return Point.Null();
             }
 
-            Neo.SmartContract.Framework.Services.Neo.StorageContext ctx = Neo.SmartContract.Framework.Services.Neo.Storage.CurrentContext;
+            EpicChain.SmartContract.Framework.Services.EpicChain.StorageContext ctx = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.CurrentContext;
             NeoStorageKey nsk = NeoStorageKey.New(vau, "Point");
 
             byte[] bkey;
             Point p;
             /*STA*/
-            byte[] bsta = Neo.SmartContract.Framework.Services.Neo.Storage.Get(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bSTA));
+            byte[] bsta = EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Get(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bSTA));
             NeoTrace.Trace("Bury(vau,index).bs", bsta.Length, bsta);
             if (bsta.Length == 0)
             {
@@ -607,13 +607,13 @@ namespace NeoCollectableClasses4
             {
                 p = Point.Tombstone(); // TODO - should Bury() preserve the exist field values or re-initialize them? Preserve is cheaper but not as private
                 /*STA*/
-                Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bSTA), p._state.AsBigInteger());
+                EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bSTA), p._state.AsBigInteger());
                 /*EXT*/
-                Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bEXT), p._extension);
+                EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bEXT), p._extension);
                 /*FIELD*/
-                Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bX), p._x);
+                EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bX), p._x);
                 /*FIELD*/
-                Neo.SmartContract.Framework.Services.Neo.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bY), p._y);
+                EpicChain.SmartContract.Framework.Services.EpicChain.Storage.Put(ctx, bkey = NeoStorageKey.StorageKey(nsk, index, _bY), p._y);
             }
             LogExt("Bury(vau,i).p", p);
             return p;
